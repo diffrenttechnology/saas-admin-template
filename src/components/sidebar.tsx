@@ -6,137 +6,186 @@ import { LayoutGroup, motion } from 'framer-motion'
 import React, { forwardRef, useId } from 'react'
 import { TouchTarget } from './button'
 import { Link } from './link'
+import { Avatar } from './avatar'
+import { Dropdown, DropdownButton, DropdownDivider, DropdownItem, DropdownLabel, DropdownMenu } from './dropdown'
+import {
+  ArrowRightStartOnRectangleIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  Cog8ToothIcon,
+  LightBulbIcon,
+  PlusIcon,
+  ShieldCheckIcon,
+  UserIcon,
+} from '@heroicons/react/16/solid'
+import {
+  Cog6ToothIcon,
+  HomeIcon,
+  InboxIcon,
+  MagnifyingGlassIcon,
+  MegaphoneIcon,
+  QuestionMarkCircleIcon,
+  SparklesIcon,
+  Square2StackIcon,
+  TicketIcon,
+} from '@heroicons/react/20/solid'
 
-export function Sidebar({ className, ...props }: React.ComponentPropsWithoutRef<'nav'>) {
-  return <nav {...props} className={clsx(className, 'flex h-full min-h-0 flex-col')} />
-}
-
-export function SidebarHeader({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function Sidebar({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      {...props}
-      className={clsx(
-        className,
-        'flex flex-col border-b border-zinc-950/5 p-4 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5'
-      )}
-    />
+    <div className="w-64 border-r border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+      {children}
+    </div>
   )
 }
 
-export function SidebarBody({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function SidebarHeader({ children }: { children: React.ReactNode }) {
+  return <div className="border-b border-zinc-200 p-4 dark:border-zinc-800">{children}</div>
+}
+
+export function SidebarBody({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-col gap-4 p-4">{children}</div>
+}
+
+export function SidebarFooter({ children }: { children: React.ReactNode }) {
+  return <div className="border-t border-zinc-200 p-4 dark:border-zinc-800">{children}</div>
+}
+
+export function SidebarSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  return <div className={`flex flex-col gap-1 ${className}`}>{children}</div>
+}
+
+export function SidebarHeading({ children }: { children: React.ReactNode }) {
+  return <div className="px-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{children}</div>
+}
+
+export function SidebarItem({ children, href, className = '' }: { children: React.ReactNode; href?: string; className?: string }) {
+  const Component = href ? Link : 'button'
   return (
-    <div
-      {...props}
-      className={clsx(
-        className,
-        'flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8'
-      )}
-    />
+    <Component
+      href={href}
+      className={`flex items-center gap-3 rounded-lg px-2 py-1.5 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white ${className}`}
+    >
+      {children}
+    </Component>
   )
 }
 
-export function SidebarFooter({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
+export function SidebarLabel({ children }: { children: React.ReactNode }) {
+  return <span className="flex-1">{children}</span>
+}
+
+export function SidebarSpacer() {
+  return <div className="flex-1" />
+}
+
+export function MainSidebar() {
   return (
-    <div
-      {...props}
-      className={clsx(
-        className,
-        'flex flex-col border-t border-zinc-950/5 p-4 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5'
-      )}
-    />
+    <Sidebar>
+      <SidebarHeader>
+        <Dropdown>
+          <DropdownButton as={SidebarItem} className="lg:mb-2.5">
+            <Avatar src="/tailwind-logo.svg" />
+            <SidebarLabel>SaaS Admin</SidebarLabel>
+            <ChevronDownIcon />
+          </DropdownButton>
+          <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
+            <DropdownItem href="/settings">
+              <Cog8ToothIcon />
+              <DropdownLabel>Settings</DropdownLabel>
+            </DropdownItem>
+            <DropdownDivider />
+            <DropdownItem href="/teams/create">
+              <PlusIcon />
+              <DropdownLabel>New team&hellip;</DropdownLabel>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <SidebarSection className="max-lg:hidden">
+          <SidebarItem href="/search">
+            <MagnifyingGlassIcon />
+            <SidebarLabel>Search</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/inbox">
+            <InboxIcon />
+            <SidebarLabel>Inbox</SidebarLabel>
+          </SidebarItem>
+        </SidebarSection>
+      </SidebarHeader>
+      <SidebarBody>
+        <SidebarSection>
+          <SidebarItem href="/">
+            <HomeIcon />
+            <SidebarLabel>Home</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/events">
+            <Square2StackIcon />
+            <SidebarLabel>Events</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/orders">
+            <TicketIcon />
+            <SidebarLabel>Orders</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/settings">
+            <Cog6ToothIcon />
+            <SidebarLabel>Settings</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/broadcasts">
+            <MegaphoneIcon />
+            <SidebarLabel>Broadcasts</SidebarLabel>
+          </SidebarItem>
+        </SidebarSection>
+        <SidebarSpacer />
+        <SidebarSection>
+          <SidebarItem href="/support">
+            <QuestionMarkCircleIcon />
+            <SidebarLabel>Support</SidebarLabel>
+          </SidebarItem>
+          <SidebarItem href="/changelog">
+            <SparklesIcon />
+            <SidebarLabel>Changelog</SidebarLabel>
+          </SidebarItem>
+        </SidebarSection>
+      </SidebarBody>
+      <SidebarFooter className="max-lg:hidden">
+        <Dropdown>
+          <DropdownButton as={SidebarItem}>
+            <span className="flex min-w-0 items-center gap-3">
+              <Avatar src="/profile-photo.jpg" className="size-10" square alt="" />
+              <span className="min-w-0">
+                <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">Admin</span>
+                <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
+                  admin@example.com
+                </span>
+              </span>
+            </span>
+            <ChevronUpIcon />
+          </DropdownButton>
+          <DropdownMenu className="min-w-64" anchor="top start">
+            <DropdownItem href="/my-profile">
+              <UserIcon />
+              <DropdownLabel>My profile</DropdownLabel>
+            </DropdownItem>
+            <DropdownItem href="/settings">
+              <Cog8ToothIcon />
+              <DropdownLabel>Settings</DropdownLabel>
+            </DropdownItem>
+            <DropdownDivider />
+            <DropdownItem href="/privacy-policy">
+              <ShieldCheckIcon />
+              <DropdownLabel>Privacy policy</DropdownLabel>
+            </DropdownItem>
+            <DropdownItem href="/share-feedback">
+              <LightBulbIcon />
+              <DropdownLabel>Share feedback</DropdownLabel>
+            </DropdownItem>
+            <DropdownDivider />
+            <DropdownItem href="/logout">
+              <ArrowRightStartOnRectangleIcon />
+              <DropdownLabel>Sign out</DropdownLabel>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </SidebarFooter>
+    </Sidebar>
   )
-}
-
-export function SidebarSection({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
-  let id = useId()
-
-  return (
-    <LayoutGroup id={id}>
-      <div {...props} data-slot="section" className={clsx(className, 'flex flex-col gap-0.5')} />
-    </LayoutGroup>
-  )
-}
-
-export function SidebarDivider({ className, ...props }: React.ComponentPropsWithoutRef<'hr'>) {
-  return <hr {...props} className={clsx(className, 'my-4 border-t border-zinc-950/5 lg:-mx-4 dark:border-white/5')} />
-}
-
-export function SidebarSpacer({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
-  return <div aria-hidden="true" {...props} className={clsx(className, 'mt-8 flex-1')} />
-}
-
-export function SidebarHeading({ className, ...props }: React.ComponentPropsWithoutRef<'h3'>) {
-  return (
-    <h3 {...props} className={clsx(className, 'mb-1 px-2 text-xs/6 font-medium text-zinc-500 dark:text-zinc-400')} />
-  )
-}
-
-export const SidebarItem = forwardRef(function SidebarItem(
-  {
-    current,
-    className,
-    children,
-    ...props
-  }: { current?: boolean; className?: string; children: React.ReactNode } & (
-    | Omit<Headless.ButtonProps, 'as' | 'className'>
-    | Omit<Headless.ButtonProps<typeof Link>, 'as' | 'className'>
-  ),
-  ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>
-) {
-  let classes = clsx(
-    // Base
-    'flex w-full items-center gap-3 rounded-lg px-2 py-2.5 text-left text-base/6 font-medium text-zinc-950 sm:py-2 sm:text-sm/5',
-    // Leading icon/icon-only
-    '*:data-[slot=icon]:size-6 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:fill-zinc-500 sm:*:data-[slot=icon]:size-5',
-    // Trailing icon (down chevron or similar)
-    '*:last:data-[slot=icon]:ml-auto *:last:data-[slot=icon]:size-5 sm:*:last:data-[slot=icon]:size-4',
-    // Avatar
-    '*:data-[slot=avatar]:-m-0.5 *:data-[slot=avatar]:size-7 sm:*:data-[slot=avatar]:size-6',
-    // Hover
-    'data-hover:bg-zinc-950/5 data-hover:*:data-[slot=icon]:fill-zinc-950',
-    // Active
-    'data-active:bg-zinc-950/5 data-active:*:data-[slot=icon]:fill-zinc-950',
-    // Current
-    'data-current:*:data-[slot=icon]:fill-zinc-950',
-    // Dark mode
-    'dark:text-white dark:*:data-[slot=icon]:fill-zinc-400',
-    'dark:data-hover:bg-white/5 dark:data-hover:*:data-[slot=icon]:fill-white',
-    'dark:data-active:bg-white/5 dark:data-active:*:data-[slot=icon]:fill-white',
-    'dark:data-current:*:data-[slot=icon]:fill-white'
-  )
-
-  return (
-    <span className={clsx(className, 'relative')}>
-      {current && (
-        <motion.span
-          layoutId="current-indicator"
-          className="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white"
-        />
-      )}
-      {'href' in props ? (
-        <Headless.CloseButton
-          as={Link}
-          {...props}
-          className={classes}
-          data-current={current ? 'true' : undefined}
-          ref={ref}
-        >
-          <TouchTarget>{children}</TouchTarget>
-        </Headless.CloseButton>
-      ) : (
-        <Headless.Button
-          {...props}
-          className={clsx('cursor-default', classes)}
-          data-current={current ? 'true' : undefined}
-          ref={ref}
-        >
-          <TouchTarget>{children}</TouchTarget>
-        </Headless.Button>
-      )}
-    </span>
-  )
-})
-
-export function SidebarLabel({ className, ...props }: React.ComponentPropsWithoutRef<'span'>) {
-  return <span {...props} className={clsx(className, 'truncate')} />
 }

@@ -1,4 +1,8 @@
 ---
+import Layout from '@/layouts/Layout.astro'
+import { SidebarLayout } from '@/components/sidebar-layout'
+import { MainSidebar } from '@/components/sidebar'
+import { MainNavbar } from '@/components/navbar'
 import { buttonVariants } from '@/components/ui/button';
 import { Github, LayoutDashboard } from 'lucide-react';
 import '@/styles/globals.css'
@@ -35,16 +39,16 @@ const repoLink = 'https://github.com/cloudflare/templates/tree/main/saas-admin-t
     <title>SaaS Admin Template</title>
   </head>
   <body>
-    <div class="flex flex-col items-center justify-center gap-4 py-20 px-8">
-      <h1 class="text-5xl font-bold">SaaS Admin Template</h1>
-      <p class="text-xl text-muted-foreground">Manage a SaaS application - customers, subscriptions - using Cloudflare Workers and D1.</p>
-      <div class="flex flex gap-4 mt-4">
-        <a class={buttonVariants()} href="/admin">
-          <LayoutDashboard /> Go to admin
-        </a>
-        <a class={buttonVariants({ variant: 'outline' })} href={repoLink}>
-          <Github /> View on GitHub
-        </a>
-    </div>
+    <Layout title="Dashboard">
+      <SidebarLayout client:load
+        navbar={<MainNavbar client:load />}
+        sidebar={<MainSidebar client:load />}
+      >
+        <div class="p-6">
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white">Dashboard</h1>
+          <p class="mt-2 text-zinc-600 dark:text-zinc-400">Welcome to your dashboard.</p>
+        </div>
+      </SidebarLayout>
+    </Layout>
   </body>
 </html>
