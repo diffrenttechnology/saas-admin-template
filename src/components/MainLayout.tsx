@@ -29,8 +29,6 @@ import {
   PlusIcon,
   ShieldCheckIcon,
   UserIcon,
-} from '@heroicons/react/16/solid'
-import {
   Cog6ToothIcon,
   HomeIcon,
   InboxIcon,
@@ -54,10 +52,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           <NavbarSpacer />
           <NavbarSection>
             <NavbarItem href="/search" aria-label="Search">
-              <MagnifyingGlassIcon />
+              <MagnifyingGlassIcon className="size-5" />
             </NavbarItem>
             <NavbarItem href="/inbox" aria-label="Inbox">
-              <InboxIcon />
+              <InboxIcon className="size-5" />
             </NavbarItem>
             <Dropdown>
               <DropdownButton as={NavbarItem}>
@@ -65,25 +63,25 @@ export function MainLayout({ children }: MainLayoutProps) {
               </DropdownButton>
               <DropdownMenu className="min-w-64" anchor="bottom end">
                 <DropdownItem href="/my-profile">
-                  <UserIcon />
+                  <UserIcon className="size-5" />
                   <DropdownLabel>My profile</DropdownLabel>
                 </DropdownItem>
                 <DropdownItem href="/settings">
-                  <Cog8ToothIcon />
+                  <Cog8ToothIcon className="size-5" />
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/privacy-policy">
-                  <ShieldCheckIcon />
+                  <ShieldCheckIcon className="size-5" />
                   <DropdownLabel>Privacy policy</DropdownLabel>
                 </DropdownItem>
                 <DropdownItem href="/share-feedback">
-                  <LightBulbIcon />
+                  <LightBulbIcon className="size-5" />
                   <DropdownLabel>Share feedback</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/logout">
-                  <ArrowRightStartOnRectangleIcon />
+                  <ArrowRightStartOnRectangleIcon className="size-5" />
                   <DropdownLabel>Sign out</DropdownLabel>
                 </DropdownItem>
               </DropdownMenu>
@@ -98,27 +96,27 @@ export function MainLayout({ children }: MainLayoutProps) {
               <DropdownButton as={SidebarItem} className="lg:mb-2.5">
                 <Avatar src="/tailwind-logo.svg" />
                 <SidebarLabel>SaaS Admin</SidebarLabel>
-                <ChevronDownIcon />
+                <ChevronDownIcon className="size-5" />
               </DropdownButton>
               <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
                 <DropdownItem href="/settings">
-                  <Cog8ToothIcon />
+                  <Cog8ToothIcon className="size-5" />
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/teams/create">
-                  <PlusIcon />
+                  <PlusIcon className="size-5" />
                   <DropdownLabel>New team&hellip;</DropdownLabel>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
             <SidebarSection className="max-lg:hidden">
               <SidebarItem href="/search">
-                <MagnifyingGlassIcon />
+                <MagnifyingGlassIcon className="size-5" />
                 <SidebarLabel>Search</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/inbox">
-                <InboxIcon />
+                <InboxIcon className="size-5" />
                 <SidebarLabel>Inbox</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
@@ -126,34 +124,34 @@ export function MainLayout({ children }: MainLayoutProps) {
           <SidebarBody>
             <SidebarSection>
               <SidebarItem href="/">
-                <HomeIcon />
+                <HomeIcon className="size-5" />
                 <SidebarLabel>Dashboard</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/analytics">
-                <Square2StackIcon />
+                <Square2StackIcon className="size-5" />
                 <SidebarLabel>Analytics</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/orders">
-                <TicketIcon />
+                <TicketIcon className="size-5" />
                 <SidebarLabel>Orders</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/settings">
-                <Cog6ToothIcon />
+                <Cog6ToothIcon className="size-5" />
                 <SidebarLabel>Settings</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/notifications">
-                <MegaphoneIcon />
+                <MegaphoneIcon className="size-5" />
                 <SidebarLabel>Notifications</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
             <SidebarSpacer />
             <SidebarSection>
               <SidebarItem href="/support">
-                <QuestionMarkCircleIcon />
+                <QuestionMarkCircleIcon className="size-5" />
                 <SidebarLabel>Support</SidebarLabel>
               </SidebarItem>
               <SidebarItem href="/changelog">
-                <SparklesIcon />
+                <SparklesIcon className="size-5" />
                 <SidebarLabel>Changelog</SidebarLabel>
               </SidebarItem>
             </SidebarSection>
@@ -170,29 +168,29 @@ export function MainLayout({ children }: MainLayoutProps) {
                     </span>
                   </span>
                 </span>
-                <ChevronUpIcon />
+                <ChevronUpIcon className="size-5" />
               </DropdownButton>
               <DropdownMenu className="min-w-64" anchor="top start">
                 <DropdownItem href="/my-profile">
-                  <UserIcon />
+                  <UserIcon className="size-5" />
                   <DropdownLabel>My profile</DropdownLabel>
                 </DropdownItem>
                 <DropdownItem href="/settings">
-                  <Cog8ToothIcon />
+                  <Cog8ToothIcon className="size-5" />
                   <DropdownLabel>Settings</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/privacy-policy">
-                  <ShieldCheckIcon />
+                  <ShieldCheckIcon className="size-5" />
                   <DropdownLabel>Privacy policy</DropdownLabel>
                 </DropdownItem>
                 <DropdownItem href="/share-feedback">
-                  <LightBulbIcon />
+                  <LightBulbIcon className="size-5" />
                   <DropdownLabel>Share feedback</DropdownLabel>
                 </DropdownItem>
                 <DropdownDivider />
                 <DropdownItem href="/logout">
-                  <ArrowRightStartOnRectangleIcon />
+                  <ArrowRightStartOnRectangleIcon className="size-5" />
                   <DropdownLabel>Sign out</DropdownLabel>
                 </DropdownItem>
               </DropdownMenu>
